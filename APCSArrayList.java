@@ -12,4 +12,5 @@ public interface APCSArrayList {
 	public int set(int index, int item); // Replaces item at index with specified item and returns old value)
 	public boolean contains(int item);
 	public int remove(int index);
+	void resize();
 }
