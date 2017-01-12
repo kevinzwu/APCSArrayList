@@ -54,8 +54,5 @@ public interface APCSArrayList {
 	 */
 	public int remove(int index);
 	
-	/**
-	 * Private method to resize the array under certain circumstances
-	 */
-	void resize();
+
 }
