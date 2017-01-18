@@ -5,7 +5,7 @@
  * @author zukowskig, Dmitriy Cheryak
  * @version 0.1
  */
-public interface APCSArrayList {
+public interface APIntList {
 	/**
 	 * Add item to the end
 	 * @param item
