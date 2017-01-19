@@ -6,7 +6,6 @@
  * @version 0.1
  */
 public interface APIntList {
-
 	/**
 	 * Returns the size of the list
 	 */
