@@ -1,5 +1,11 @@
-/*
-* Tester code for APCSArrayList.
+/**
+ *
+ * Tester code for APCSArrayList.
+ * This code will run as long as there is a APArrayIntList
+ * class defined in the same folder as this file.
+ * 
+ * You should NOT need to modify this code 
+ * 
 */
 public class APCSArrayListTester {
     public static void main (String[] args) {
@@ -10,9 +16,9 @@ public class APCSArrayListTester {
         IndexedAddTestErrorCases();
     }
  
-    /*
+    /**
     * Tests the basic functionality of add(int item) method
-    */
+    */    
     public static void BasicAddTest()
     {
         System.out.println("------------------------ START BasicAddTest() ------------------------");
@@ -35,7 +41,7 @@ public class APCSArrayListTester {
         System.out.println();
     }
     
-    /*
+    /**
     * Tests the functionality of add(int item) method with a lot of values
     */
     public static void LargeAddTest()
@@ -58,7 +64,7 @@ public class APCSArrayListTester {
         System.out.println();
     }
     
-    /*
+    /**
     * Tests the functionality of add(int index, int item) method
     */
     public static void IndexedAddTest()
@@ -100,7 +106,7 @@ public class APCSArrayListTester {
         System.out.println();
     }
 
-    /*
+    /**
     * Tests the error functionality of add(int index, int item method)
     */
     public static void IndexedAddTestErrorCases()
@@ -143,16 +149,21 @@ public class APCSArrayListTester {
         System.out.println();
     }
     
-    /*
-    * Prints whether or not the proper exception was thrown
-    */
+    /**
+     * Prints whether or not the proper exception was thrown
+     * @param exceptionThrown determines whether an exception was thrown
+     * @param index index of value accessed
+     */
     public static void PrintExceptionThrown(boolean exceptionThrown, String index)
     {
         System.out.println(getPassFailFromBool(exceptionThrown) + "    Verify that list.add(index, value) when " + index + " throws IndexOutOfBoundsException");
     }
     
-    /*
+    /**
     * Checks and prints whether the value at the specified index in the list is the expected value.
+    * @param list the list to verify value at
+    * @param index the index to verify value at
+    * @param expectedItem the expected value at index in list
     */
     public static void VerifyValueAtIndex(APIntList list, int index, int expectedItem)
     {
@@ -160,17 +171,21 @@ public class APCSArrayListTester {
     }
 
 
-    /*
+    /**
     * Checks and prints whether the list is the expected size
+    * @param list the list to verify the size of
+    * @param expectedSize the expected size of the list
     */
     public static void VerifyListSize(APIntList list, int expectedSize)
     {
         System.out.println(getPassFailFromBool(list.size() == expectedSize) + "     Verify list.size() [Expected: " + expectedSize + ", Actual " + list.size() + "]");
     }
     
-    /*
+    /**
     * Helper method to print "   PASS   " or "***FAIL***" based on a boolean value
     * Asterisks used to help student spot failing tests better.
+    * @param pass whether or not the test passed
+    * @return "   PASS   " or "***FAIL***" based on pass
     */
     private static String getPassFailFromBool(boolean pass)
     {
