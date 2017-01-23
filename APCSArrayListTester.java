@@ -8,177 +8,208 @@
  * 
 */
 public class APCSArrayListTester {
+    
     public static void main (String[] args) {
 
-        BasicAddTest();
-        LargeAddTest();
-        IndexedAddTest(); 
-        IndexedAddTestErrorCases();
+        double totalTestPoints = 20;
+        double successfulTestPoints = 0;
+        
+        successfulTestPoints += basicAddTest();
+        successfulTestPoints += largeAddTest();
+        successfulTestPoints += indexedAddTest(); 
+        successfulTestPoints += indexedAddTestErrorCases();
+        
+        System.out.println(successfulTestPoints + "/" + totalTestPoints + "=" + (successfulTestPoints / totalTestPoints));
     }
  
     /**
     * Tests the basic functionality of add(int item) method
     */    
-    public static void BasicAddTest()
+    public static double basicAddTest()
     {
+        boolean testPass = true;
+        
         System.out.println("------------------------ START BasicAddTest() ------------------------");
         System.out.println("Creating new APArrayIntList");
         APIntList list = new APArrayIntList();
-        VerifyListSize(list, 0); 
+        testPass &= verifyListSize(list, 0); 
         
         System.out.println("Calling list.add(5) ");
         list.add(5);
-        VerifyListSize(list, 1);
-        VerifyValueAtIndex(list, 0, 5);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, 5);
         
         System.out.println("Calling list.add(2)");
         list.add(2);
-        VerifyListSize(list, 2);
-        VerifyValueAtIndex(list, 1, 2);
+        testPass &= verifyListSize(list, 2);
+        testPass &= verifyValueAtIndex(list, 1, 2);
         
         System.out.println("------------------------ END BasicAddTest() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
     
     /**
     * Tests the functionality of add(int item) method with a lot of values
     */
-    public static void LargeAddTest()
+    public static double largeAddTest()
     {
+        boolean testPass = true;
+        
         System.out.println("------------------------ START LargeAddTest() ------------------------");
         System.out.println("Creating new APArrayIntList");
         APIntList list = new APArrayIntList();
-        VerifyListSize(list, 0); 
+        testPass &= verifyListSize(list, 0); 
         
         int size = 0;
         for(int index = 0; index < 100; index++) {
             System.out.println("Calling list.add(" + index + ")");
             list.add(index);
-            VerifyListSize(list, ++size);
-            VerifyValueAtIndex(list, index, index);
+            testPass &= verifyListSize(list, ++size);
+            testPass &= verifyValueAtIndex(list, index, index);
         }
         
         System.out.println("------------------------ END LargeAddTest() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
     
     /**
     * Tests the functionality of add(int index, int item) method
     */
-    public static void IndexedAddTest()
+    public static double indexedAddTest()
     {
+        boolean testPass = true;
+        
         System.out.println("------------------------ START IndexedAddTest() ------------------------");
         
         System.out.println("Creating new APArrayIntList");
         APIntList list = new APArrayIntList();
-        VerifyListSize(list, 0); 
+        testPass &= verifyListSize(list, 0); 
         
         System.out.println("Calling list.add(2)");
         list.add(2);
-        VerifyListSize(list, 1);
-        VerifyValueAtIndex(list, 0, 2);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, 2);
         
         System.out.println("Calling list.add(1, 4) ");
         list.add(1, 4);
-        VerifyListSize(list, 2);
-        VerifyValueAtIndex(list, 0, 2);
-        VerifyValueAtIndex(list, 1, 4);
+        testPass &= verifyListSize(list, 2);
+        testPass &= verifyValueAtIndex(list, 0, 2);
+        testPass &= verifyValueAtIndex(list, 1, 4);
         
         System.out.println("Calling list.add(0, 10)");
         list.add(0, 10);
-        VerifyListSize(list, 3);
-        VerifyValueAtIndex(list, 0, 10);
-        VerifyValueAtIndex(list, 1, 2);
-        VerifyValueAtIndex(list, 2, 4);    
+        testPass &= verifyListSize(list, 3);
+        testPass &= verifyValueAtIndex(list, 0, 10);
+        testPass &= verifyValueAtIndex(list, 1, 2);
+        testPass &= verifyValueAtIndex(list, 2, 4);    
         
         System.out.println("Calling list.add(1, 12)");
         list.add(1, 12);
-        VerifyListSize(list, 4);
-        VerifyValueAtIndex(list, 0, 10);
-        VerifyValueAtIndex(list, 1, 12);
-        VerifyValueAtIndex(list, 2, 2);
-        VerifyValueAtIndex(list, 3, 4);
+        testPass &= verifyListSize(list, 4);
+        testPass &= verifyValueAtIndex(list, 0, 10);
+        testPass &= verifyValueAtIndex(list, 1, 12);
+        testPass &= verifyValueAtIndex(list, 2, 2);
+        testPass &= verifyValueAtIndex(list, 3, 4);
         
         System.out.println("------------------------ END IndexedAddTest() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
 
     /**
     * Tests the error functionality of add(int index, int item method)
     */
-    public static void IndexedAddTestErrorCases()
+    public static double indexedAddTestErrorCases()
     {
+        boolean testPass = true;
+        String method = "list.add(item, index)";
+        
         System.out.println("------------------------ START IndexedAddTestErrorCases() ------------------------");
         
         System.out.println("Creating new APArrayIntList");
         APIntList list = new APArrayIntList();
-        VerifyListSize(list, 0); 
+        testPass &= verifyListSize(list, 0); 
         
         System.out.println("Calling list.add(2)");
         list.add(2);
-        VerifyListSize(list, 1);
-        VerifyValueAtIndex(list, 0, 2);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, 2);
         
         System.out.println("Calling list.add(-1, 4) ");
         try {
             list.add(-1, 4);
-            PrintExceptionThrown(false, "index < 0");
+            testPass &= verifyExceptionThrown(false, method, "index < 0");
         }
         catch(IndexOutOfBoundsException e) {
-            PrintExceptionThrown(true, "index < 0");
-            VerifyListSize(list, 1);
-            VerifyValueAtIndex(list, 0, 2);
+            testPass &= verifyExceptionThrown(true, method, "index < 0");
+            testPass &= verifyListSize(list, 1);
+            testPass &= verifyValueAtIndex(list, 0, 2);
         }
         
         System.out.println("Calling list.add(2, 10)");
         try {
             list.add(2, 10);
-            PrintExceptionThrown(false, "index > size()");
+            testPass &= verifyExceptionThrown(false, method, "index > size()");
         }
         catch(IndexOutOfBoundsException e) {
-            PrintExceptionThrown(true, "index > size()");
-            VerifyListSize(list, 1);
-            VerifyValueAtIndex(list, 0, 2);
+            testPass &= verifyExceptionThrown(true, method, "index > size()");
+            testPass &= verifyListSize(list, 1);
+            testPass &= verifyValueAtIndex(list, 0, 2);
         }
         
         System.out.println("------------------------ END IndexedAddTestErrorCases() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
     
     /**
-     * Prints whether or not the proper exception was thrown
+     * Verifies whether or not the proper exception was thrown
      * @param exceptionThrown determines whether an exception was thrown
-     * @param index index of value accessed
+     * @param method the method called
+     * @param condition the condition that should raise exception
      */
-    public static void PrintExceptionThrown(boolean exceptionThrown, String index)
+    public static boolean verifyExceptionThrown(boolean exceptionThrown, String method, String condition)
     {
-        System.out.println(getPassFailFromBool(exceptionThrown) + "    Verify that list.add(index, value) when " + index + " throws IndexOutOfBoundsException");
+        System.out.println(getPassFailFromBool(exceptionThrown) + "    Verify that " + method + " when " + condition + " throws IndexOutOfBoundsException");
+        return exceptionThrown;
     }
     
     /**
-    * Checks and prints whether the value at the specified index in the list is the expected value.
+    * Verifies whether the value at the specified index in the list is the expected value.
     * @param list the list to verify value at
     * @param index the index to verify value at
     * @param expectedItem the expected value at index in list
     */
-    public static void VerifyValueAtIndex(APIntList list, int index, int expectedItem)
+    public static boolean verifyValueAtIndex(APIntList list, int index, int expectedItem)
     {
-        System.out.println(getPassFailFromBool(list.get(index) == expectedItem) + "     Verify list.get(int index) [Expected at index " + index + ": " + expectedItem + ", Actual at index " + index + ": " + list.get(index) + "]");
+        int actualItem = list.get(index);
+        boolean result = actualItem == expectedItem;
+        System.out.println(getPassFailFromBool(result) + "     Verify list.get(int index) [Expected at index " + index + ": " + expectedItem + ", Actual at index " + index + ": " + actualItem + "]");
+        return result;
     }
 
 
     /**
-    * Checks and prints whether the list is the expected size
+    * Verifies whether the list is the expected size
     * @param list the list to verify the size of
     * @param expectedSize the expected size of the list
     */
-    public static void VerifyListSize(APIntList list, int expectedSize)
+    public static boolean verifyListSize(APIntList list, int expectedSize)
     {
-        System.out.println(getPassFailFromBool(list.size() == expectedSize) + "     Verify list.size() [Expected: " + expectedSize + ", Actual " + list.size() + "]");
+        int actualSize = list.size();
+        boolean result = actualSize == expectedSize;
+        System.out.println(getPassFailFromBool(result) + "     Verify list.size() [Expected: " + expectedSize + ", Actual " + actualSize + "]");
+        return result;
     }
     
     /**
@@ -189,9 +220,19 @@ public class APCSArrayListTester {
     */
     private static String getPassFailFromBool(boolean pass)
     {
-        if(pass){    
+        if(pass){
             return "   PASS   ";
         }
         return "***FAIL***";
+    }
+    
+    private static double getPoints(boolean testPass)
+    {
+        if (testPass)
+        {
+            return 1;
+        }
+        
+        return 0;
     }
 }
