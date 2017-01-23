@@ -110,7 +110,23 @@ The average temperature was 71.75.
 
 Note that in this problem, we do not ask up front for the number of temperatures we're looking for. Because we do not know the exact number, a list is a good choice for a problem like this because it will handle any amount of entries for us automatically.
 
-Rubric:
+Checkpoint (Friday 1/27) Rubric:
+
+1 point: Correct class header which implements the interface.
+
+2 points: Fields that keep track of state, declared appropriately using the correct access specifiers.
+
+2 points: Constructor that initializes the fields
+
+2 points: `int size()` method
+
+2 point: `void add(int item)` method (for < 5 items)
+
+2 points: `int get(int index)` method
+
+4 points: Passes the provided tests.
+
+Final Submission (Friday 2/3) Rubric:
 
 5 points: Follow all style conventions introduced so far. Use good comments explaining what you are doing and why. At the very least, comment every public method to describe its behavior.
 
