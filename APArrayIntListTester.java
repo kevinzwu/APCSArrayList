@@ -2,14 +2,14 @@ import java.util.*;
 
 /**
  *
- * Tester code for APCSArrayList.
+ * Tester code for APArrayIntList.
  * This code will run as long as there is a APArrayIntList
  * class defined in the same folder as this file.
  * 
  * You should NOT need to modify this code 
  * 
 */
-public class APCSArrayListTester
+public class APArrayIntListTester
 {
     public static final int TOTAL_TESTS = 20;
     public static final double TOTAL_TEST_POINTS = 20;
