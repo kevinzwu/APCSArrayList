@@ -24,6 +24,7 @@ public class APCSArrayListTester {
  
     /**
     * Tests the basic functionality of add(int item) method
+    * @return the amount of points earned for the test
     */    
     public static double basicAddTest()
     {
@@ -53,6 +54,7 @@ public class APCSArrayListTester {
     
     /**
     * Tests the functionality of add(int item) method with a lot of values
+    * @return the amount of points earned for the test
     */
     public static double largeAddTest()
     {
@@ -80,6 +82,7 @@ public class APCSArrayListTester {
     
     /**
     * Tests the functionality of add(int index, int item) method
+    * @return the amount of points earned for the test
     */
     public static double indexedAddTest()
     {
@@ -126,6 +129,7 @@ public class APCSArrayListTester {
 
     /**
     * Tests the error functionality of add(int index, int item method)
+    * @return the amount of points earned for the test
     */
     public static double indexedAddTestErrorCases()
     {
@@ -177,6 +181,7 @@ public class APCSArrayListTester {
      * @param exceptionThrown determines whether an exception was thrown
      * @param method the method called
      * @param condition the condition that should raise exception
+     * @return whether the verification was successful
      */
     public static boolean verifyExceptionThrown(boolean exceptionThrown, String method, String condition)
     {
@@ -189,6 +194,7 @@ public class APCSArrayListTester {
     * @param list the list to verify value at
     * @param index the index to verify value at
     * @param expectedItem the expected value at index in list
+    * @return whether the verification was successful
     */
     public static boolean verifyValueAtIndex(APIntList list, int index, int expectedItem)
     {
@@ -203,6 +209,7 @@ public class APCSArrayListTester {
     * Verifies whether the list is the expected size
     * @param list the list to verify the size of
     * @param expectedSize the expected size of the list
+    * @return whether the verification was successful
     */
     public static boolean verifyListSize(APIntList list, int expectedSize)
     {
@@ -226,9 +233,14 @@ public class APCSArrayListTester {
         return "***FAIL***";
     }
     
-    private static double getPoints(boolean testPass)
+    /**
+    * Converts whether a test was successful to points
+    * @param pass whether or not the test passed
+    * @return the default amount of points if a test passed or 0 if it failed
+    */
+    private static double getPoints(boolean pass)
     {
-        if (testPass)
+        if (pass)
         {
             return 1;
         }
