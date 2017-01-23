@@ -25,7 +25,7 @@ public class APCSArrayListTester {
     /**
     * Tests the basic functionality of add(int item) method
     */    
-    public static void basicAddTest()
+    public static double basicAddTest()
     {
         boolean testPass = true;
         
@@ -44,17 +44,17 @@ public class APCSArrayListTester {
         testPass &= verifyListSize(list, 2);
         testPass &= verifyValueAtIndex(list, 1, 2);
         
-        recordTestResult(testPass);
-        
         System.out.println("------------------------ END BasicAddTest() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
     
     /**
     * Tests the functionality of add(int item) method with a lot of values
     */
-    public static void largeAddTest()
+    public static double largeAddTest()
     {
         boolean testPass = true;
         
@@ -71,17 +71,17 @@ public class APCSArrayListTester {
             testPass &= verifyValueAtIndex(list, index, index);
         }
         
-        recordTestResult(testPass);
-        
         System.out.println("------------------------ END LargeAddTest() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
     
     /**
     * Tests the functionality of add(int index, int item) method
     */
-    public static void indexedAddTest()
+    public static double indexedAddTest()
     {
         boolean testPass = true;
         
@@ -121,50 +121,55 @@ public class APCSArrayListTester {
         System.out.println();
         System.out.println();
         
-        record
+        return getPoints(testPass);
     }
 
     /**
     * Tests the error functionality of add(int index, int item method)
     */
-    public static void indexedAddTestErrorCases()
+    public static double indexedAddTestErrorCases()
     {
+        boolean testPass = true;
+        String method = "list.add(item, index)";
+        
         System.out.println("------------------------ START IndexedAddTestErrorCases() ------------------------");
         
         System.out.println("Creating new APArrayIntList");
         APIntList list = new APArrayIntList();
-        VerifyListSize(list, 0); 
+        testPass &= verifyListSize(list, 0); 
         
         System.out.println("Calling list.add(2)");
         list.add(2);
-        VerifyListSize(list, 1);
-        VerifyValueAtIndex(list, 0, 2);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, 2);
         
         System.out.println("Calling list.add(-1, 4) ");
         try {
             list.add(-1, 4);
-            PrintExceptionThrown(false, "index < 0");
+            testPass &= verifyExceptionThrown(false, method, "index < 0");
         }
         catch(IndexOutOfBoundsException e) {
-            PrintExceptionThrown(true, "index < 0");
-            VerifyListSize(list, 1);
-            VerifyValueAtIndex(list, 0, 2);
+            testPass &= verifyExceptionThrown(true, method, "index < 0");
+            testPass &= verifyListSize(list, 1);
+            testPass &= verifyValueAtIndex(list, 0, 2);
         }
         
         System.out.println("Calling list.add(2, 10)");
         try {
             list.add(2, 10);
-            PrintExceptionThrown(false, "index > size()");
+            testPass &= verifyExceptionThrown(false, method, "index > size()");
         }
         catch(IndexOutOfBoundsException e) {
-            PrintExceptionThrown(true, "index > size()");
-            VerifyListSize(list, 1);
-            VerifyValueAtIndex(list, 0, 2);
+            testPass &= verifyExceptionThrown(true, method, "index > size()");
+            testPass &= verifyListSize(list, 1);
+            testPass &= verifyValueAtIndex(list, 0, 2);
         }
         
         System.out.println("------------------------ END IndexedAddTestErrorCases() ------------------------");
         System.out.println();
         System.out.println();
+        
+        return getPoints(testPass);
     }
     
     /**
@@ -221,12 +226,13 @@ public class APCSArrayListTester {
         return "***FAIL***";
     }
     
-    private static void recordTestResult(boolean testPass)
+    private static double getPoints(boolean testPass)
     {
-        totalTests++;
         if (testPass)
         {
-            successfulTests++;
+            return 1;
         }
+        
+        return 0;
     }
 }
