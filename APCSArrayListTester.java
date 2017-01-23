@@ -7,11 +7,13 @@
  * You should NOT need to modify this code 
  * 
 */
-public class APCSArrayListTester {
+public class APCSArrayListTester 
+{    
+    public static final int TOTAL_TESTS = 4;
+    public static final double TOTAL_TEST_POINTS = 20;
     
-    public static void main (String[] args) {
-
-        double totalTestPoints = 20;
+    public static void main (String[] args) 
+    {
         double successfulTestPoints = 0;
         
         successfulTestPoints += basicAddTest();
@@ -19,7 +21,8 @@ public class APCSArrayListTester {
         successfulTestPoints += indexedAddTest(); 
         successfulTestPoints += indexedAddTestErrorCases();
         
-        System.out.println(successfulTestPoints + "/" + totalTestPoints + "=" + (successfulTestPoints / totalTestPoints));
+        int percentage = (int)(successfulTestPoints / TOTAL_TEST_POINTS * 100);
+        System.out.println(successfulTestPoints + " / " + TOTAL_TEST_POINTS + " = " + percentage + "%");
     }
  
     /**
@@ -66,7 +69,8 @@ public class APCSArrayListTester {
         testPass &= verifyListSize(list, 0); 
         
         int size = 0;
-        for(int index = 0; index < 100; index++) {
+        for(int index = 0; index < 100; index++) 
+        {
             System.out.println("Calling list.add(" + index + ")");
             list.add(index);
             testPass &= verifyListSize(list, ++size);
@@ -148,7 +152,8 @@ public class APCSArrayListTester {
         testPass &= verifyValueAtIndex(list, 0, 2);
         
         System.out.println("Calling list.add(-1, 4) ");
-        try {
+        try 
+        {
             list.add(-1, 4);
             testPass &= verifyExceptionThrown(false, method, "index < 0");
         }
@@ -159,7 +164,8 @@ public class APCSArrayListTester {
         }
         
         System.out.println("Calling list.add(2, 10)");
-        try {
+        try 
+        {
             list.add(2, 10);
             testPass &= verifyExceptionThrown(false, method, "index > size()");
         }
@@ -227,7 +233,8 @@ public class APCSArrayListTester {
     */
     private static String getPassFailFromBool(boolean pass)
     {
-        if(pass){
+        if (pass)
+        {
             return "   PASS   ";
         }
         return "***FAIL***";
@@ -242,7 +249,7 @@ public class APCSArrayListTester {
     {
         if (pass)
         {
-            return 1;
+            return TOTAL_TEST_POINTS / TOTAL_TESTS;
         }
         
         return 0;
