@@ -11,7 +11,7 @@ import java.util.*;
 */
 public class APCSArrayListTester
 {
-    public static final int TOTAL_TESTS = 14;
+    public static final int TOTAL_TESTS = 20;
     public static final double TOTAL_TEST_POINTS = 20;
     public static final int PSEUDO_RANDOM_SEED = 0x5f3759df;
     
@@ -35,7 +35,13 @@ public class APCSArrayListTester
         successfulTestPoints += indexedAddErrorCasesTest();
         successfulTestPoints += getErrorCasesTest();
         successfulTestPoints += setErrorCasesTest();
-        
+        successfulTestPoints += singleAddMultipleArrayListTest();
+        successfulTestPoints += basicAddMultipleArrayListTest();
+        successfulTestPoints += largeAddMultipleArrayListTest();
+        successfulTestPoints += reverseListTest();
+        successfulTestPoints += sieveOfEratosthenesTest();
+        successfulTestPoints += quickSortTest();
+
         double percentage = successfulTestPoints / TOTAL_TEST_POINTS * 100;
         System.out.println(String.format("%.2f", successfulTestPoints) + " / " + String.format("%.2f", TOTAL_TEST_POINTS) + " = " + String.format("%.2f", percentage) + "%");
     }
@@ -616,7 +622,331 @@ public class APCSArrayListTester
         
         return getPoints(testPass);
     }
+
+    /**
+    * Tests calling add(int item) method once on two different array lists
+    * @return the amount of points earned for the test
+    */
+    public static double singleAddMultipleArrayListTest()
+    {
+        boolean testPass = true;
+        
+        System.out.println("------------------------ START singleAddMultipleArrayListTest() ------------------------");
+        System.out.println("Creating new APArrayIntList");
+        APIntList list = new APArrayIntList();
+        testPass &= verifyListSize(list, 0);
+
+        System.out.println("Creating new APArrayIntList");
+        APIntList list2 = new APArrayIntList();
+        testPass &= verifyListSize(list2, 0);
+        
+        System.out.println("Calling list.add(-1) ");
+        list.add(-1);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, -1);
+        testPass &= verifyListSize(list2, 0);
+
+        System.out.println("Calling list2.add(1) ");
+        list2.add(1);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, -1);
+        testPass &= verifyListSize(list2, 1);
+        testPass &= verifyValueAtIndex(list2, 0, 1);
+        
+        System.out.println("------------------------ END singleAddMultipleArrayListTest() ------------------------");
+        System.out.println();
+        System.out.println();
+        
+        return getPoints(testPass);
+    }
+ 
+    /**
+    * Tests the basic functionality of add(int item) method on two different array lists
+    * @return the amount of points earned for the test
+    */
+    public static double basicAddMultipleArrayListTest()
+    {
+        boolean testPass = true;
+        
+        System.out.println("------------------------ START basicAddMultipleArrayListTest() ------------------------");
+
+        System.out.println("Creating new APArrayIntList");
+        APIntList list = new APArrayIntList();
+        testPass &= verifyListSize(list, 0);
+
+        System.out.println("Creating new APArrayIntList");
+        APIntList list2 = new APArrayIntList();
+        testPass &= verifyListSize(list2, 0);
+        
+        System.out.println("Calling list.add(-1) ");
+        list.add(-1);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, -1);
+        testPass &= verifyListSize(list2, 0);
+
+        System.out.println("Calling list2.add(1) ");
+        list2.add(1);
+        testPass &= verifyListSize(list, 1);
+        testPass &= verifyValueAtIndex(list, 0, -1);
+        testPass &= verifyListSize(list2, 1);
+        testPass &= verifyValueAtIndex(list2, 0, 1);
+
+        System.out.println("Calling list.add(-1) ");
+        list.add(-1);
+        testPass &= verifyListSize(list, 2);
+        testPass &= verifyValueAtIndex(list, 0, -1);
+        testPass &= verifyValueAtIndex(list, 1, -1);
+        testPass &= verifyListSize(list2, 1);
+        testPass &= verifyValueAtIndex(list2, 0, 1);
+
+        System.out.println("Calling list2.add(2) ");
+        list2.add(2);
+        testPass &= verifyListSize(list, 2);
+        testPass &= verifyValueAtIndex(list, 0, -1);
+        testPass &= verifyValueAtIndex(list, 1, -1);
+        testPass &= verifyListSize(list2, 2);
+        testPass &= verifyValueAtIndex(list2, 0, 1);
+        testPass &= verifyValueAtIndex(list2, 1, 2);
+        
+        System.out.println("------------------------ END basicAddMultipleArrayListTest() ------------------------");
+        System.out.println();
+        System.out.println();
+        
+        return getPoints(testPass);
+    }
     
+    /**
+    * Tests the functionality of add(int item) method with a lot of values on two different array lists
+    * @return the amount of points earned for the test
+    */
+    public static double largeAddMultipleArrayListTest()
+    {
+        boolean testPass = true;
+        
+        System.out.println("------------------------ START largeAddMultipleArrayListTest() ------------------------");
+        System.out.println("Creating new APArrayIntList");
+        APIntList list = new APArrayIntList();
+        testPass &= verifyListSize(list, 0); 
+
+        System.out.println("Creating new APArrayIntList");
+        APIntList list2 = new APArrayIntList();
+        testPass &= verifyListSize(list, 0); 
+
+        ArrayList<Integer> javaList = new ArrayList<Integer>();
+        ArrayList<Integer> javaList2 = new ArrayList<Integer>();
+        
+        for(int index = 0; index < 2000; index++) 
+        {
+            int value = getPseudoRandomInt();
+
+            if (convertToIntInRange(value, 2) == 0)
+            {
+                System.out.println("Calling list.add(" + value + ")");
+                list.add(value);
+                javaList.add(value);
+                testPass &= verifyListsMatch(list, javaList);
+                testPass &= verifyListsMatch(list2, javaList2);
+            }
+            else
+            {
+                System.out.println("Calling list2.add(" + value + ")");
+                list2.add(value);
+                javaList2.add(value);
+                testPass &= verifyListsMatch(list, javaList);
+                testPass &= verifyListsMatch(list2, javaList2);
+            }
+        }
+        
+        System.out.println("------------------------ END largeAddMultipleArrayListTest() ------------------------");
+        System.out.println();
+        System.out.println();
+        
+        return getPoints(testPass);
+    }
+
+    /**
+    * Tests by implementing reversing a list
+    * @return the amount of points earned for the test
+    */
+    public static double reverseListTest()
+    {
+        boolean testPass = true;
+        
+        System.out.println("------------------------ START reverseListTest() ------------------------");
+        System.out.println("Creating new APArrayIntList");
+        APIntList list = new APArrayIntList();
+        ArrayList<Integer> javaList = new ArrayList<Integer>();
+
+        for (int i = 0; i < 256; i++)
+        {
+            int value = getPseudoRandomInt();
+            list.add(value);
+            javaList.add(value);
+        }
+
+        Collections.reverse(javaList);
+
+        for (int i = 0; i < list.size() / 2; i++)
+        {
+            int temp = list.get(i);
+            list.set(i, list.get(list.size() - i - 1));
+            list.set(list.size() - i - 1, temp);
+        }
+
+        testPass &= verifyListsMatch(list, javaList);
+
+        System.out.println("------------------------ END reverseListTest() ------------------------");
+        System.out.println();
+        System.out.println();
+        
+        return getPoints(testPass);
+    }
+
+    /**
+    * Tests by implementing Sieve of Eratosthenes
+    * @return the amount of points earned for the test
+    */
+    public static double sieveOfEratosthenesTest()
+    {
+        boolean testPass = true;
+        
+        System.out.println("------------------------ START sieveOfEratosthenesTest() ------------------------");
+        System.out.println("Creating new APArrayIntList");
+        APIntList list = new APArrayIntList();
+        for (int i = 0; i < 50; i++)
+        {
+            list.add(i);
+        }
+        
+        list.set(1, 0);
+        
+        for (int i = 2; i < list.size(); i++)
+        {
+            if (list.get(i) != 0)
+            {
+                for (int num = i + i; num < list.size(); num += i)
+                {
+                    list.set(num, 0);
+                }
+            }
+        }
+        
+        String actualPrimesList = "";
+        
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (list.get(i) != 0)
+            {
+                if (actualPrimesList.length() == 0)
+                {
+                    actualPrimesList += list.get(i);
+                }
+                else
+                {
+                    actualPrimesList += ", " + list.get(i);
+                }
+            }
+        }
+        
+        String expectedPrimesList = "2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47";
+        boolean result = actualPrimesList.equals(expectedPrimesList);
+        System.out.println(getPassFailFromBool(result) + "     Verify primes list [Expected  " + expectedPrimesList + ", Actual " + actualPrimesList);
+        testPass &= result;
+        
+        System.out.println("------------------------ END sieveOfEratosthenesTest() ------------------------");
+        System.out.println();
+        System.out.println();
+        
+        return getPoints(testPass);
+    }
+
+    /**
+    * Tests by implementing quick sort
+    * @return the amount of points earned for the test
+    */
+    public static double quickSortTest()
+    {
+        boolean testPass = true;
+        
+        System.out.println("------------------------ START quickSortTest() ------------------------");
+        System.out.println("Creating new APArrayIntList");
+        APIntList list = new APArrayIntList();
+        ArrayList<Integer> javaList = new ArrayList<Integer>();
+
+        for (int i = 0; i < 1024; i++)
+        {
+            int value = getPseudoRandomInt();
+            list.add(value);
+            javaList.add(value);
+        }
+        
+        Collections.sort(javaList);
+        quickSort(list);
+        
+        testPass &= verifyListsMatch(list, javaList);
+        
+        System.out.println("------------------------ END quickSortTest() ------------------------");
+        System.out.println();
+        System.out.println();
+        
+        return getPoints(testPass);
+    }
+    
+    private static void quickSort(APIntList list)
+    {
+        quickSortHelper(list, 0, list.size() - 1);
+    }
+    
+    private static void quickSortHelper(APIntList list, int start, int end)
+    {
+        if (start >= end)
+        {
+            return;
+        }
+        
+        int pivot = list.get(start);
+        int leftIndex = start;
+        int rightIndex = end;
+        int pivotIndex = start;
+        
+        while (leftIndex < rightIndex)
+        {
+            if (pivotIndex == rightIndex)
+            {
+                int value = list.get(leftIndex);
+                if (value > pivot)
+                {
+                    list.set(pivotIndex, value);
+                    list.set(leftIndex, pivot);
+                    pivotIndex = leftIndex;
+                    rightIndex--;
+                }
+                else
+                {
+                    leftIndex++;
+                }
+            }
+            else
+            {
+                int value = list.get(rightIndex);
+                if (value < pivot)
+                {
+                    list.set(pivotIndex, value);
+                    list.set(rightIndex, pivot);
+                    pivotIndex = rightIndex;
+                    leftIndex++;
+                }
+                else
+                {
+                    rightIndex--;
+                }
+            }
+        }
+        
+        quickSortHelper(list, start, leftIndex - 1);
+        quickSortHelper(list, leftIndex + 1, end);
+    }
+
     /**
      * Verifies whether or not the AP list matches the Java list
      * @param list the APIntList
@@ -676,7 +1006,6 @@ public class APCSArrayListTester
         System.out.println(getPassFailFromBool(result) + "     Verify list.get(int index) [Expected at index " + index + ": " + expectedItem + ", Actual at index " + index + ": " + actualItem + "]");
         return result;
     }
-
 
     /**
     * Verifies whether the list is the expected size
