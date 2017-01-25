@@ -892,11 +892,21 @@ public class APArrayIntListTester
         return getPoints(testPass);
     }
     
+    /**
+    * Sorts the provided list using the quick sort algorithm
+    * @param list the list to sort
+    */
     private static void quickSort(APIntList list)
     {
         quickSortHelper(list, 0, list.size() - 1);
     }
     
+    /**
+    * Sorts the section of the list between start and end inclusive
+    * @param list the list to sort
+    * @param start the starting index of the section to sort
+    * @param end the ending index of the section to sort
+    */
     private static void quickSortHelper(APIntList list, int start, int end)
     {
         if (start >= end)
