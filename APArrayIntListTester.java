@@ -472,7 +472,8 @@ public class APArrayIntListTester
             list.add(-1, 4);
             testPass &= verifyExceptionThrown(false, method, "index < 0");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index < 0");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -484,7 +485,8 @@ public class APArrayIntListTester
             list.add(2, 10);
             testPass &= verifyExceptionThrown(false, method, "index > size()");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index > size()");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -523,7 +525,8 @@ public class APArrayIntListTester
             list.get(-1);
             testPass &= verifyExceptionThrown(false, method, "index < 0");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index < 0");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -535,7 +538,8 @@ public class APArrayIntListTester
             list.get(1);
             testPass &= verifyExceptionThrown(false, method, "index == size()");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index == size()");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -547,7 +551,8 @@ public class APArrayIntListTester
             list.get(100);
             testPass &= verifyExceptionThrown(false, method, "index > size()");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index > size()");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -586,7 +591,8 @@ public class APArrayIntListTester
             list.set(-1, 0);
             testPass &= verifyExceptionThrown(false, method, "index < 0");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index < 0");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -598,7 +604,8 @@ public class APArrayIntListTester
             list.set(1, 0);
             testPass &= verifyExceptionThrown(false, method, "index == size()");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index == size()");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
@@ -610,7 +617,8 @@ public class APArrayIntListTester
             list.set(100, 0);
             testPass &= verifyExceptionThrown(false, method, "index > size()");
         }
-        catch(IndexOutOfBoundsException e) {
+        catch(IndexOutOfBoundsException e) 
+        {
             testPass &= verifyExceptionThrown(true, method, "index > size()");
             testPass &= verifyListSize(list, 1);
             testPass &= verifyValueAtIndex(list, 0, 2);
