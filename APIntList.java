@@ -15,7 +15,7 @@ public interface APIntList {
 	 * Adds the item to the end of the list
 	 * @param item
 	 */
-    void add(int item);
+	void add(int item);
 
 	/**
 	 * Add item to the specified index, move everything else up
@@ -41,10 +41,8 @@ public interface APIntList {
 	/**
 	 * Uncomment me if you're doing extra credit
 	 * and replace with appropriate documentation
-	 * @param item
-	 * @return
 	 */
-	// boolean contains(int item);
+	// void clear();
 	
 	/**
 	 * Uncomment me if you're doing extra credit
