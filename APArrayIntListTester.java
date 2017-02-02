@@ -24,7 +24,7 @@ public class APArrayIntListTester
         successfulTestPoints += initializeTest();
         successfulTestPoints += singleAddTest();
         successfulTestPoints += basicAddTest();
-        /*successfulTestPoints += largeAddTest();
+        successfulTestPoints += largeAddTest();
         successfulTestPoints += singleIndexedAddTest();
         successfulTestPoints += basicIndexedAddTest();
         successfulTestPoints += largeIndexedAddTest();
@@ -34,14 +34,14 @@ public class APArrayIntListTester
         successfulTestPoints += largeMixedTest();
         successfulTestPoints += indexedAddErrorCasesTest();
         successfulTestPoints += getErrorCasesTest();
-        successfulTestPoints += setErrorCasesTest();*/
+        successfulTestPoints += setErrorCasesTest();
         successfulTestPoints += singleAddMultipleArrayListTest();
-        /*successfulTestPoints += basicAddMultipleArrayListTest();
+        successfulTestPoints += basicAddMultipleArrayListTest();
         successfulTestPoints += largeAddMultipleArrayListTest();
         successfulTestPoints += reverseListTest();
         successfulTestPoints += sieveOfEratosthenesTest();
         successfulTestPoints += quickSortTest();
-        */
+        
         double percentage = successfulTestPoints / TOTAL_TEST_POINTS * 100;
         System.out.println(String.format("%.2f", successfulTestPoints) + " / " + String.format("%.2f", TOTAL_TEST_POINTS) + " = " + String.format("%.2f", percentage) + "%");
     }
