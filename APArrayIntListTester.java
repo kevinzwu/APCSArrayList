@@ -11,8 +11,8 @@ import java.util.*;
 */
 public class APArrayIntListTester
 {
-    public static final int TOTAL_TESTS = 4;
-    public static final double TOTAL_TEST_POINTS = 4;
+    public static final int TOTAL_TESTS = 20;
+    public static final double TOTAL_TEST_POINTS = 20;
     public static final int PSEUDO_RANDOM_SEED = 0x5f3759df;
     
     public static int pseudoRandomNumber = PSEUDO_RANDOM_SEED;
