@@ -154,7 +154,7 @@ Final Submission (Friday 2/3) Rubric:
 
 Extra credit:
 
-2 points: Read the `java.util.List` documentation and implement `int remove(int index)` and `void clear()` methods appropriately.
+2 points: Look up the Java api with your favorite search engine, read the `java.util.List` documentation and implement `int remove(int index)` and `void clear()` methods appropriately.
 
 3 points: Investigate options for the resize method and answer the below questions.
 When you add an element to your list, you are writing to the underlying array (executing a statement that looks like `arr[2] = 5;`) at least once, but you might have to do extra array writes if you need to resize the underlying array. Starting from an array of length 5, and doubling the array on each resize, how many array writes total will happen if you call add 5 times? 10 times? 20 times? 40 times? 100 times? 1000 times? 10000 times? How many array writes happen per add call if you call add 5 times, 10 times, 20 times, 40 times, 100 times, 1000 times, 10000 times?
